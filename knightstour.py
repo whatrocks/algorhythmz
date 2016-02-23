@@ -62,4 +62,14 @@ def find_solution_for(board_size, heuristic=lambda graph: None):
 
     return first_true(traverse([], starting_vertex) for starting_vertex in graph)
 
-print find_solution_for(5)
+def warnsdorffs_heuristic(graph):
+    """
+    Given a graph, return a comparator function that prioritizes
+    nodes with the fewest subsequent moves
+    """
+    def comparator(a, b):
+        return len(graph[a]) - len(graph[b])
+
+    return comparator
+
+print find_solution_for(8, warnsdorffs_heuristic)
